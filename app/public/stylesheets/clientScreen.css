@@ -1,0 +1,49 @@
+.integration__video-container {
+    position: relative;
+    padding-bottom: 480px;
+    margin: 55px auto 0 auto;
+    width: 50vw;
+    height: 0;
+    overflow: hidden;
+    border: 1px solid #dbdbdb;
+}
+.integration__video-container iframe {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.integration__button{
+    position: fixed;
+    right: 0px;
+    padding: 0 20px;
+    line-height: 40px;
+    font-size: 16px;
+    height: auto;
+    border-radius: 3px;
+    color: #363838;
+    background-color: #25b4b0;
+    font-weight: 700;
+    text-transform:  uppercase;
+    cursor: pointer;
+}
+.integration__button--vertical{
+    transform: rotate(90deg);
+    transform-origin: right top 0;
+}
+.integration__button.vertical-right{
+    top: 60vh;
+    right: 0px;
+}
+.integration__overlay{
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+.hidden{
+    display: none;
+}

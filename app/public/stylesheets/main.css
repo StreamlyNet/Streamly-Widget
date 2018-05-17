@@ -1,1 +1,232 @@
-// TODO: add css 
+body{
+    position: relative;
+    z-index: 2;
+    background: white;
+    font-family: sans-serif;
+    margin: 0;
+}
+.hide{
+    display: none;
+}
+.flexboxCenter, .videoContainer__body .btnContainer.top, .videoContainer__body .videoContainer__spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.localVideo--props, .videoContainer__body #localVideoContainer #localVideo, .videoContainer__body #localVideoContainer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.loadingDots, .videoContainer__body .btnContainer.top .callingString:after, .videoContainer__body #remoteContainer .loadingScreen .loadingScreen__text::after {
+  display: inline-block;
+  animation: dotty steps(1, end) 2s infinite;
+  content: "";
+  position: absolute;
+}
+
+@keyframes dotty {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+  100% {
+    content: "";
+  }
+}
+.videoContainer__body #localVideoContainer {
+  transition: 0.5s;
+  opacity: 0;
+  min-height: 100px;
+}
+.videoContainer__body #localVideoContainer #localVideo {
+  opacity: 0;
+  width: 150px;
+}
+.videoContainer__body #localVideoContainer.display {
+  opacity: 1;
+}
+.videoContainer__body #localVideoContainer.display #localVideo {
+  opacity: 1;
+}
+.videoContainer__body #remoteContainer {
+  min-width: 640px;
+  min-height: 480px;
+}
+.videoContainer__body #remoteContainer .callingScreen {
+  background-color: #4d5c6c;
+  height: 480px;
+  text-align: center;
+}
+.videoContainer__body #remoteContainer .callingScreen .callingScreen__image {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  border: 1px solid white;
+  margin: 0 auto;
+  display: inline-block;
+  background-position: center;
+  background-size: cover;
+}
+.videoContainer__body #remoteContainer .callingScreen .callingScreen__name {
+  color: white;
+  padding: 95px 0 35px 0;
+  font-size: 16px;
+}
+.videoContainer__body #remoteContainer .loadingScreen {
+  background-color: #4d5c6c;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+}
+.videoContainer__body #remoteContainer .loadingScreen .loadingScreen__image {
+  width: 150px;
+}
+.videoContainer__body #remoteContainer .loadingScreen .loadingScreen__text {
+  color: #fff;
+  font-size: 16px;
+  position: relative;
+  top: -10px;
+}
+.videoContainer__body #remoteContainer .loadingScreen .loadingScreen__container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.videoContainer__body #remoteContainer video {
+  width: 640px;
+  height: 480px;
+  background-color: #4d5c6c;
+}
+.videoContainer__body #remoteContainer video, .videoContainer__body #localVideo, .videoContainer__body .btnContainer {
+  border-radius: 2px;
+}
+.videoContainer__body .videoContainer__spinner {
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  transition: 0.5s;
+  opacity: 0;
+  width: calc(100% - 38px);
+}
+.videoContainer__body .videoContainer__spinner.display {
+  opacity: 1;
+  z-index: 11;
+}
+.videoContainer__body .videoContainer__body {
+  min-width: 640px;
+  transition: 0.5s;
+  opacity: 0;
+}
+.videoContainer__body .videoContainer__body.display {
+  opacity: 1;
+}
+.videoContainer__body .contentBox {
+  position: relative;
+  height: 482px;
+}
+.videoContainer__body .contentBox > .flex.gutterHLg {
+  min-width: 640px;
+}
+.videoContainer__body > .cornerTR {
+  left: calc(680px - 35px);
+}
+.videoContainer__body .videoContainer {
+  position: relative;
+  height: 480px;
+}
+.videoContainer__body .btnContainer {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  bottom: 0;
+  transition: 0.5s;
+  opacity: 0;
+}
+.videoContainer__body .btnContainer.display {
+  opacity: 1;
+}
+.videoContainer__body .btnContainer .btnContainer__overlay {
+  background-color: #000;
+  opacity: 0.3;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  z-index: 0;
+}
+.videoContainer__body .btnContainer > .btn {
+  font-size: 18px;
+  width: 45px;
+  height: 45px;
+  padding: 0;
+  position: relative;
+  margin: 0 3px;
+  border-radius: 25px;
+}
+.videoContainer__body .btnContainer > .btn.red.btn-default {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.videoContainer__body .btnContainer > .btn.red.btn-default:hover {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+.videoContainer__body .btnContainer > .btn-default:not([disabled]):hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.videoContainer__body .btnContainer > .btn-default:not(.red):not([disabled]):active, .videoContainer__body .btnContainer > .btn-default.paused, .videoContainer__body .btnContainer > .btn-default.muted {
+  color: #333;
+  background-color: #d4d4d4;
+  border-color: #8c8c8c;
+}
+.videoContainer__body .btnContainer .fa-phone.end-call {
+  transform: rotate(135deg);
+}
+.videoContainer__body .btnContainer.top {
+  top: 0;
+  bottom: initial;
+  justify-content: initial;
+  font-size: 16px;
+  color: white;
+}
+.videoContainer__body .btnContainer.top .durationDisplay__text, .videoContainer__body .btnContainer.top .nickname, .videoContainer__body .btnContainer.top .centPerMinute__container {
+  position: relative;
+  z-index: 10;
+  width: 33.3%;
+}
+.videoContainer__body .btnContainer.top .nickname {
+  padding-left: 20px;
+}
+.videoContainer__body .btnContainer.top .nickname:hover {
+  cursor: pointer;
+}
+.videoContainer__body .btnContainer.top .callingString {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+.videoContainer__body .btnContainer .js-fullScreen[disabled] {
+  opacity: 0.2;
+}

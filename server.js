@@ -17,6 +17,6 @@ Router.forEach(route => {
 });
 
 
-server.listen(conf.port, {},(e) => {
+server.listen(conf.port,(e) => {
   console.log(`Server has started on port ${conf.port}`);
 });
