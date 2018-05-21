@@ -5748,7 +5748,7 @@ JSONPPolling.prototype.doPoll = function () {
   this.script = script;
 
   var isUAgecko = 'undefined' != typeof navigator && /gecko/i.test(navigator.userAgent);
-  
+
   if (isUAgecko) {
     setTimeout(function () {
       var iframe = document.createElement('iframe');
@@ -11867,7 +11867,7 @@ function PeerConnection(config, constraints) {
             return [];
         };
     }
-    
+
     if (typeof this.pc.getSenders === 'function') {
         this.getSenders = this.pc.getSenders.bind(this.pc);
     } else {

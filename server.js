@@ -5,7 +5,7 @@ require('./utils/prodEnv')();
 let express = require('express');
 let http = require('http');
 let Router = rootRequire('app/Router');
-let conf = rootRequire('config/serverConf.json');
+let config = rootRequire('config/config.js');
 let app = express();
 let server = http.createServer(app);
 
@@ -17,6 +17,6 @@ Router.forEach(route => {
 });
 
 
-server.listen(conf.port,(e) => {
-  console.log(`Server has started on port ${conf.port}`);
+server.listen(config.server.port, (e) => {
+  console.log(`Server has started on port ${config.server.port}`);
 });
