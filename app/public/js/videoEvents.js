@@ -1,16 +1,6 @@
 var isFullScreen = false;
 var countTimer;
 
-function showVideoModal(){
-     $('.integration__video-container').removeClass('hidden');
-     $('.integration__overlay').removeClass('hidden');
- }
-
- function hideVideoModal(){
-     $('.integration__video-container').addClass('hidden');
-     $('.integration__overlay').addClass('hidden');
- }
-
  function toggleCallingWindow (flag, video) {
      var callDetailsSelector = $('#videoContainer').find('.btnContainer.top .nickname, .btnContainer.top .durationDisplay__text, .btnContainer.top .centPerMinute__container');
      var callingStringSelector = $('#videoContainer').find('.btnContainer.top .callingString');

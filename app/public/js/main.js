@@ -9,8 +9,12 @@ var currId = config.widgetId;
 var listing = config.context;
 var remotePeerId = config.remotePeerId;
 
+// Temp variable used to fix bug with incorrect RTCPeerConnection
+var tempConnection;
+
 $(document).ready(function() {
   events();
+  tempConnection = window.RTCPeerConnection;
 });
 
 function init() {
@@ -78,16 +82,6 @@ function events() {
     self.closeConn();
   });
 
-  // Call store
-  // $('.js-call').on('click', function() {
-  //   init();
-  //   webrtcEvents();
-  //   socketEvents();
-  //   self.toggleCallingWindow(true);
-  //   self.showVideoModal();
-  //   self.webrtc.startLocalVideo();
-  // });
-
   // Fullscreen
   $('.js-fullScreen').on('click', function() {
       self.handleFullScreenBtnClick(self)
@@ -101,7 +95,12 @@ function events() {
 
   // Listen to messages from parent window
   bindEvent(window, 'message', function (e) {
-    if (e.data && e.data.type === 'startCall') {
+    if (e.data && e.data.type === 'initiateCall') {
+      // Fix problem with window scopes. Problem:
+      // When accessing iframe from global window (client provider),
+      // it changes RTCPeerConnection function to the native one, though
+      // it was set to SimpleWebRTC's implementation.
+      window.RTCPeerConnection = tempConnection;
       self.startCall();
     }
   });
@@ -112,7 +111,6 @@ function startCall() {
   webrtcEvents();
   socketEvents();
   self.toggleCallingWindow(true);
-  self.showVideoModal();
   self.webrtc.startLocalVideo();
 }
 
@@ -263,7 +261,15 @@ function closeConn() {
   webrtc = null;
   socket = null;
 
-  hideVideoModal();
+  // Inform client provider window that call has ended.
+  // It should hide the modal.
+  var data = {
+    to: self.remotePeerId,
+    from: self.currId
+  };
+
+  window.parent.postMessage({message: 'close'}, '*');
+
   clearTimer();
   clearCountTimer();
 }
