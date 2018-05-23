@@ -1,0 +1,7 @@
+.hidden{
+    display: none;
+}
+
+.err {
+    border: 2px solid red;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Streamly widget generator</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/generator.css">
+</head>
+<body>
+    <div class="generatorContainer">
+        <div>
+            <div id="buttonInfo">
+              Store name: <input type="text" name="store" id="store"><br>
+              Listing name: <input type="text" name="listing" id="listing"><br>
+              Store peer id: <input type="text" name="peerId" id="peerID"><br>
+              <button class="js-generate">Get code</button>
+            </div>
+        </div>
+        <div id="resultContainer" class="hidden">
+            <div>
+                <h3>Step 1: Please add the following code before the end of the body tag</h3>
+                <pre id="code">
+
+                </pre>
+            </div>
+            <div>
+                <h3>Step 2: After completing step 1, add the following button wherever you want on your website</h3>
+                <pre id="createdBtn">
+
+                </pre>
+            </div>
+        </div>
+    </div>
+    <script src="/js/generateWidget.js"></script>
+</body>
+</html>

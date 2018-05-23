@@ -5,9 +5,9 @@ var callTimer;
 var callTimerDelay = config.callTimerDelay;
 
 // Provider information
-var currId = config.widgetId;
-var listing = config.context;
-var remotePeerId = config.remotePeerId;
+var store;
+var listing;
+var remotePeerId;
 
 // Temp variable used to fix bug with incorrect RTCPeerConnection
 var tempConnection;
@@ -96,6 +96,9 @@ function events() {
   // Listen to messages from parent window
   bindEvent(window, 'message', function (e) {
     if (e.data && e.data.type === 'initiateCall') {
+      self.store = e.data.storeName;
+      self.remotePeerId = e.data.peerId;
+      self.listing = e.data.listingName;
       // Fix problem with window scopes. Problem:
       // When accessing iframe from global window (client provider),
       // it changes RTCPeerConnection function to the native one, though
@@ -237,7 +240,7 @@ function uuid() {
 }
 
 function changeSelfState() {
-   socket.emit('changeSelfState', { from: this.currId });
+   socket.emit('changeSelfState', { from: this.store });
 }
 
 function clearTimer() {
@@ -265,7 +268,7 @@ function closeConn() {
   // It should hide the modal.
   var data = {
     to: self.remotePeerId,
-    from: self.currId
+    from: self.store
   };
 
   window.parent.postMessage({message: 'close'}, '*');

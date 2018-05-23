@@ -11,5 +11,8 @@ module.exports = [
     path: '/streamly/api',
     handler: rootRequire('app/routes/StreamlyAPIRoute'),
   },
+  {
+    path: '/generator',
+    handler: rootRequire('app/routes/GeneratorRoute'),
   }
 ]
