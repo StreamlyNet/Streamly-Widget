@@ -1,11 +1,12 @@
 var isFullScreen = false;
 var countTimer;
 
- function toggleCallingWindow (flag, video) {
+ function toggleCallingWindow (flag, storeName, video) {
      var callDetailsSelector = $('#videoContainer').find('.btnContainer.top .nickname, .btnContainer.top .durationDisplay__text, .btnContainer.top .centPerMinute__container');
      var callingStringSelector = $('#videoContainer').find('.btnContainer.top .callingString');
      var callingProfileSelector = $('#videoContainer').find('.callingScreen');
      if (flag){
+        $('.callingScreen__name').text(storeName);
         handleDisplayVideoControls($('#videoContainer'));
         callDetailsSelector.removeClass('hide');
         callDetailsSelector.addClass('hide');
@@ -14,6 +15,7 @@ var countTimer;
         disattachVisualizeVideoControlEvents();
         $('.js-fullScreen').prop("disabled", true);
      } else {
+         $('.nickname').text(storeName);
          $('#remoteContainer').append(video);
          callDetailsSelector.removeClass('hide');
          callingStringSelector.removeClass('hide');

@@ -113,7 +113,7 @@ function startCall() {
   init();
   webrtcEvents();
   socketEvents();
-  self.toggleCallingWindow(true);
+  self.toggleCallingWindow(true, store, null);
   self.webrtc.startLocalVideo();
 }
 
@@ -160,7 +160,7 @@ function webrtcEvents() {
         }
       });
     }
-    self.toggleCallingWindow(false, video);
+    self.toggleCallingWindow(false, store, video);
   });
 
   webrtc.on('readyToCall', function() {
