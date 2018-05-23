@@ -4,4 +4,4 @@ module.exports = {
       res.render('clientScreen');
     },
   },
-}
+};

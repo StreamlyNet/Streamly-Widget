@@ -1,6 +1,7 @@
 'use strict'
 
 require('./utils/rootRequire')();
+require('./utils/stringPath')();
 require('./utils/prodEnv')();
 let express = require('express');
 let http = require('http');

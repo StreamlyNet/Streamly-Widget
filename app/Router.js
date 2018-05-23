@@ -6,5 +6,10 @@ module.exports = [
   {
     path: '/test',
     handler: rootRequire('app/routes/TestRoute'),
+  },
+  {
+    path: '/streamly/api',
+    handler: rootRequire('app/routes/StreamlyAPIRoute'),
+  },
   }
 ]
