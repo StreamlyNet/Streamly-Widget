@@ -75,7 +75,7 @@ function events() {
   $('.js-end').on('click', function() {
     var data = {
       to: self.remotePeerId,
-      from: self.currId
+      from: self.store
     };
 
     self.socket.emit('endCall', data);
@@ -132,7 +132,7 @@ function webrtcEvents() {
   webrtc.on('connectionReady', function(sessionId) {
     console.log('Connection is ready with session id ' + sessionId);
     self.sid = sessionId;
-    self.socket.emit('initializeSession', {obId: self.currId, sid: self.sid});
+    self.socket.emit('initializeSession', {obId: self.store, sid: self.sid});
   });
 
   webrtc.on('videoAdded', function(video, peer) {
@@ -167,17 +167,17 @@ function webrtcEvents() {
       self.webrtc.createRoom(self.uuid(), function (error, roomId) {
         data = {
           to: self.remotePeerId,
-          from: self.currId,
+          from: self.store,
           listingName: self.listing,
           createdRoomId: roomId,
-          remotePeerName: self.currId,
+          remotePeerName: self.store,
           avatarHashes: ""
         };
 
       self.socket.emit('call', data);
 
       self.callTimer = setTimeout(function() {
-        self.socket.emit('timeOut', {to: self.remotePeerId, from: self.currId });
+        self.socket.emit('timeOut', {to: self.remotePeerId, from: self.store });
         self.closeConn();
         console.log('No answer');
       }, callTimerDelay);
