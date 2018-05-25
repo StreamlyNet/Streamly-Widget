@@ -7,6 +7,7 @@ var countTimer;
      var callingProfileSelector = $('#videoContainer').find('.callingScreen');
      if (flag){
         $('.callingScreen__name').text(storeName);
+        $('#remoteContainer video').remove();
         handleDisplayVideoControls($('#videoContainer'));
         callDetailsSelector.removeClass('hide');
         callDetailsSelector.addClass('hide');
@@ -114,10 +115,10 @@ function handleCancelFullScreenBtnClick(self){
       isFullscreen = false;
       $("#videoContainer").off('mousemove');
       clearTimeout(self.animationControlsTimeout);
-      $('.videoContainer').css('height','480px');
-      $('.videoContainer').css('width','640px');
-      $('#remoteContainer video').css('height','480px');
-      $('#remoteContainer video').css('width','640px');
+      $('.videoContainer').css('height','100%');
+      $('.videoContainer').css('width','100%');
+      $('#remoteContainer video').css('height','100%');
+      $('#remoteContainer video').css('width','`100%`');
       fullscreenButton.off();
       fullscreenButton.attr('title', 'FullScreen');
       fullscreenButton.html('<i class="fa fa-arrows-alt" aria-hidden="true"></i>');

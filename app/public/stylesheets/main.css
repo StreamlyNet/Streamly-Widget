@@ -61,12 +61,12 @@ body{
   opacity: 1;
 }
 .videoContainer__body #remoteContainer {
-  min-width: 640px;
-  min-height: 480px;
+  min-width: 100%%;
+  min-height: 100%;
 }
 .videoContainer__body #remoteContainer .callingScreen {
   background-color: #4d5c6c;
-  height: 480px;
+  min-height: 480px;
   text-align: center;
 }
 .videoContainer__body #remoteContainer .callingScreen .callingScreen__image {
@@ -108,8 +108,9 @@ body{
   justify-content: center;
 }
 .videoContainer__body #remoteContainer video {
-  width: 640px;
-  height: 480px;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
   background-color: #4d5c6c;
 }
 .videoContainer__body #remoteContainer video, .videoContainer__body #localVideo, .videoContainer__body .btnContainer {
@@ -138,17 +139,17 @@ body{
 }
 .videoContainer__body .contentBox {
   position: relative;
-  height: 482px;
+  height: 100%;
 }
 .videoContainer__body .contentBox > .flex.gutterHLg {
-  min-width: 640px;
+  min-width: 100%;
 }
 .videoContainer__body > .cornerTR {
   left: calc(680px - 35px);
 }
 .videoContainer__body .videoContainer {
   position: relative;
-  height: 480px;
+  height: 100%;
 }
 .videoContainer__body .btnContainer {
   position: absolute;

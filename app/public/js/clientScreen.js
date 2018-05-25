@@ -102,8 +102,6 @@ function attachIframe() {
             id: 'clientScreen__iframe',
             src: 'http://localhost:8080/',
             allowFullScreen: '',
-            height: "640",
-            width: "1200",
             frameborder: "0",
             allow: "microphone; camera"
          })
