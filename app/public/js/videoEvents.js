@@ -115,10 +115,10 @@ function handleCancelFullScreenBtnClick(self){
       isFullscreen = false;
       $("#videoContainer").off('mousemove');
       clearTimeout(self.animationControlsTimeout);
-      $('.videoContainer').css('height','100%');
-      $('.videoContainer').css('width','100%');
-      $('#remoteContainer video').css('height','100%');
-      $('#remoteContainer video').css('width','`100%`');
+      $('.videoContainer').css('height','480px');
+      $('.videoContainer').css('width','720px');
+      $('#remoteContainer video').css('height','480px');
+      $('#remoteContainer video').css('width','720px');
       fullscreenButton.off();
       fullscreenButton.attr('title', 'FullScreen');
       fullscreenButton.html('<i class="fa fa-arrows-alt" aria-hidden="true"></i>');
@@ -144,5 +144,15 @@ function clearCountTimer() {
         clearInterval(window.callDurationInterval);
         $('.durationDisplay__number').text('00:00');
         $('.centPerMinute__value').text('0.00');
+    }
+}
+function toggleChatWindow(){
+    var isChatOpen = $('.videoContainer').hasClass('chatOpen') && $('.chatContainer').hasClass('chatOpen');
+    if(isChatOpen){
+        $('.videoContainer').removeClass('chatOpen');
+        $('.chatContainer').removeClass('chatOpen');
+    }else {
+        $('.videoContainer').addClass('chatOpen');
+        $('.chatContainer').addClass('chatOpen');
     }
 }

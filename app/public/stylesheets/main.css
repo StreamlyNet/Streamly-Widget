@@ -17,7 +17,7 @@ body{
 .localVideo--props, .videoContainer__body #localVideoContainer #localVideo, .videoContainer__body #localVideoContainer {
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: 0;
   z-index: 10;
 }
 
@@ -52,7 +52,7 @@ body{
 }
 .videoContainer__body #localVideoContainer #localVideo {
   opacity: 0;
-  width: 150px;
+  width: 112.7px;
 }
 .videoContainer__body #localVideoContainer.display {
   opacity: 1;
@@ -137,19 +137,36 @@ body{
 .videoContainer__body .videoContainer__body.display {
   opacity: 1;
 }
-.videoContainer__body .contentBox {
-  position: relative;
-  height: 100%;
-}
-.videoContainer__body .contentBox > .flex.gutterHLg {
+.videoContainer__body > .flex.gutterHLg {
   min-width: 100%;
-}
-.videoContainer__body > .cornerTR {
-  left: calc(680px - 35px);
+  overflow: hidden;
 }
 .videoContainer__body .videoContainer {
   position: relative;
-  height: 100%;
+  height: 480px;
+}
+.videoContainer__body .videoContainer.chatOpen {
+    width: 70%;
+    float: left;
+}
+.videoContainer__body .videoContainer.chatOpen video{
+    object-fit: cover;
+}
+.chatContainer{
+    display: none;
+}
+.videoContainer__body .chatContainer.chatOpen {
+    display: flex;
+    width: 30%;
+    background-color: #d5dde1;
+    height: 480px;
+    float: left;
+    position: relative;
+    padding: 1%;
+    font-size: 14px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    flex-direction: column;
 }
 .videoContainer__body .btnContainer {
   position: absolute;
@@ -172,7 +189,7 @@ body{
   bottom: 0;
   z-index: 0;
 }
-.videoContainer__body .btnContainer > .btn {
+.videoContainer__body .btnContainer .btn {
   font-size: 18px;
   width: 45px;
   height: 45px;
@@ -181,22 +198,22 @@ body{
   margin: 0 3px;
   border-radius: 25px;
 }
-.videoContainer__body .btnContainer > .btn.red.btn-default {
+.videoContainer__body .btnContainer .btn.red.btn-default {
   color: #fff;
   background-color: #d9534f;
   border-color: #d43f3a;
 }
-.videoContainer__body .btnContainer > .btn.red.btn-default:hover {
+.videoContainer__body .btnContainer .btn.red.btn-default:hover {
   color: #fff;
   background-color: #c9302c;
   border-color: #ac2925;
 }
-.videoContainer__body .btnContainer > .btn-default:not([disabled]):hover {
+.videoContainer__body .btnContainer .btn-default:not([disabled]):hover {
   color: #333;
   background-color: #e6e6e6;
   border-color: #adadad;
 }
-.videoContainer__body .btnContainer > .btn-default:not(.red):not([disabled]):active, .videoContainer__body .btnContainer > .btn-default.paused, .videoContainer__body .btnContainer > .btn-default.muted {
+.videoContainer__body .btnContainer .btn-default:not(.red):not([disabled]):active, .videoContainer__body .btnContainer .btn-default.paused, .videoContainer__body .btnContainer .btn-default.muted {
   color: #333;
   background-color: #d4d4d4;
   border-color: #8c8c8c;
@@ -230,4 +247,74 @@ body{
 }
 .videoContainer__body .btnContainer .js-fullScreen[disabled] {
   opacity: 0.2;
+}
+
+.videoContainer__body .chatContainer .chatBar{
+    display: flex;
+    flex-flow: column;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+    flex-grow: 1;
+    flex-flow: column-reverse;
+    height: 100%;
+}
+.videoContainer__body .chatLogo{
+    width: 100px;
+    background-color: #4d5c6c;
+    padding: 10px;
+    border-radius: 60px;
+    position: absolute;
+    z-index: 0;
+    top: calc(50% - 60px);
+    left: calc(50% - 60px);
+    opacity: .2;
+}
+.chatBubble{
+    padding: 5px;
+    max-width: 80%;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+}
+.chatBubble:first-child{
+    margin-bottom: 10px;
+}
+.chatBubble:last-child{
+    margin-top: 0;
+}
+.chatBubble.mine{
+    background-color: #25b4b0;
+    align-self: flex-end;
+}
+.chatBubble.theirs{
+    background-color: #fff;
+    align-self: flex-start;
+}
+.chatBubble>.caption{
+    font-size: 10px;
+    margin-bottom: 3px;
+    font-weight: 700;
+}
+.chatBubble>.time{
+    font-size: 9px;
+    margin-top: 3px;
+    font-weight: 700;
+    text-align: right;
+}
+.chatInput{
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 3px;
+    text-indent: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+.videoContainer__body .btnContainer > .openchatbtn{
+    float: right;
+    margin-right: 7%;
+}
+.btnContainer__video{
+    float: left;
+    margin-left: calc(50% - 102px);
 }

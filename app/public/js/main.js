@@ -50,6 +50,9 @@ function events() {
       $(this).html('<i class="fa fa-microphone-slash" aria-hidden="true"></i>');
     }
   });
+  $('.js-openchat').on('click', function(e) {
+      self.toggleChatWindow();
+  });
 
   // Video button click
   $('.js-pause').on('click', function(e) {
