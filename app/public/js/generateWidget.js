@@ -9,7 +9,7 @@ var codeTemplate = '<script>\n' +
                    '})();\n'+
                    '</script>';
 
-var buttonTemplate = '<button class="streamlyBtn" data-store-name="${store}" data-listing-name="${listing}" data-peer-id="${peerId}">Contact store</button>';
+var buttonTemplate = '<button class="streamlyBtn" data-widget-store-name="${widgetStore}" data-remote-store-name="${remoteStore}" data-listing-name="${listing}" data-peer-id="${peerId}">Contact store</button>';
 
 $(".js-generate").on('click', function(e) {
     var $inputs = $('#buttonInfo :input');

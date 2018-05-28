@@ -7,7 +7,8 @@ function events() {
             type: 'initiateCall',
             peerId: $(this).data().peerId,
             listingName: $(this).data().listingName,
-            storeName: $(this).data().storeName,
+            widgetStoreName: $(this).data().widgetStoreName,
+            remoteStoreName: $(this).data().remoteStoreName
         };
 
         iframeEl.contentWindow.postMessage(msg, '*');

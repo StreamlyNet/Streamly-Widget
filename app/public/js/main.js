@@ -4,8 +4,10 @@ var sid;
 var callTimer;
 var callTimerDelay = config.callTimerDelay;
 
+var currStoreName;
+
 // Provider information
-var store;
+var remoteStoreName;
 var listing;
 var remotePeerId;
 
@@ -50,6 +52,7 @@ function events() {
       $(this).html('<i class="fa fa-microphone-slash" aria-hidden="true"></i>');
     }
   });
+
   $('.js-openchat').on('click', function(e) {
       self.toggleChatWindow();
   });
@@ -78,7 +81,7 @@ function events() {
   $('.js-end').on('click', function() {
     var data = {
       to: self.remotePeerId,
-      from: self.store
+      from: self.currStoreName
     };
 
     self.socket.emit('endCall', data);
@@ -120,7 +123,8 @@ function events() {
   // Listen to messages from parent window
   bindEvent(window, 'message', function (e) {
     if (e.data && e.data.type === 'initiateCall') {
-      self.store = e.data.storeName;
+      self.currStoreName = e.data.widgetStoreName;
+      self.remoteStoreName = e.data.remoteStoreName;
       self.remotePeerId = e.data.peerId;
       self.listing = e.data.listingName;
       // Fix problem with window scopes. Problem:
@@ -137,7 +141,7 @@ function startCall() {
   init();
   webrtcEvents();
   socketEvents();
-  self.toggleCallingWindow(true, store, null);
+  self.toggleCallingWindow(true, remoteStoreName, null);
   self.webrtc.startLocalVideo();
 }
 
@@ -156,7 +160,7 @@ function webrtcEvents() {
   webrtc.on('connectionReady', function(sessionId) {
     console.log('Connection is ready with session id ' + sessionId);
     self.sid = sessionId;
-    self.socket.emit('initializeSession', {obId: self.store, sid: self.sid});
+    self.socket.emit('initializeSession', {obId: self.currStoreName, sid: self.sid});
   });
 
   webrtc.on('videoAdded', function(video, peer) {
@@ -184,24 +188,24 @@ function webrtcEvents() {
         }
       });
     }
-    self.toggleCallingWindow(false, store, video);
+    self.toggleCallingWindow(false, remoteStoreName, video);
   });
 
   webrtc.on('readyToCall', function() {
       self.webrtc.createRoom(self.uuid(), function (error, roomId) {
         data = {
           to: self.remotePeerId,
-          from: self.store,
+          from: self.currStoreName,
           listingName: self.listing,
           createdRoomId: roomId,
-          remotePeerName: self.store,
+          remotePeerName: self.currStoreName,
           avatarHashes: ""
         };
 
       self.socket.emit('call', data);
 
       self.callTimer = setTimeout(function() {
-        self.socket.emit('timeOut', {to: self.remotePeerId, from: self.store });
+        self.socket.emit('timeOut', {to: self.remotePeerId, from: self.currStoreName });
         self.closeConn();
         console.log('No answer');
       }, callTimerDelay);
@@ -270,7 +274,7 @@ function uuid() {
 }
 
 function changeSelfState() {
-   socket.emit('changeSelfState', { from: this.store });
+   socket.emit('changeSelfState', { from: currStoreName });
 }
 
 function clearTimer() {
