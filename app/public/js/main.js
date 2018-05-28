@@ -96,6 +96,27 @@ function events() {
     });
   });
 
+  // Send message
+  $('.chatInput').keypress(function(e) {
+    if (e.which === 13) {
+      var message = $('.chatInput').val().trim();
+
+      if (message === '') {
+        return;
+      }
+
+      var data = {
+        from: self.currStoreName,
+        to: self.remotePeerId,
+        msg: message
+      };
+
+      self.prependMsg(data, true);
+
+      self.socket.emit('chatMsg', data);
+    }
+  });
+
   // Listen to messages from parent window
   bindEvent(window, 'message', function (e) {
     if (e.data && e.data.type === 'initiateCall') {
@@ -226,6 +247,12 @@ function socketEvents() {
       self.closeConn();
     }
   });
+
+  socket.on('chatMsg', function(data) {
+    if (data.msg) {
+      self.prependMsg(data, false);
+    }
+  });
 }
 
 // Used to create unique room name
@@ -269,13 +296,9 @@ function closeConn() {
 
   // Inform client provider window that call has ended.
   // It should hide the modal.
-  var data = {
-    to: self.remotePeerId,
-    from: self.store
-  };
-
   window.parent.postMessage({message: 'close'}, '*');
 
   clearTimer();
   clearCountTimer();
+  deleteChat();
 }

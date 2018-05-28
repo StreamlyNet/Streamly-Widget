@@ -148,10 +148,10 @@ function clearCountTimer() {
 }
 function toggleChatWindow(){
     var isChatOpen = $('.videoContainer').hasClass('chatOpen') && $('.chatContainer').hasClass('chatOpen');
-    if(isChatOpen){
+    if (isChatOpen) {
         $('.videoContainer').removeClass('chatOpen');
         $('.chatContainer').removeClass('chatOpen');
-    }else {
+    } else {
         $('.videoContainer').addClass('chatOpen');
         $('.chatContainer').addClass('chatOpen');
     }

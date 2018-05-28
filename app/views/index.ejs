@@ -49,20 +49,8 @@
           </div>
         </div>
         <div class="chatContainer">
-            <img class="chatLogo" src="../imgs/streamlyVectorIconNoText.png" >
-            <div class="chatBar">
-
-              <div class="chatBubble theirs">
-                  <div class="caption">Store Admin</div>
-                  <span class="text">Haven't been better! How about you?</span>
-                  <div class="time">1:44 PM</div>
-              </div>
-              <div class="chatBubble mine">
-                  <div class="caption">You</div>
-                  <span class="text">How are you dude?</span>
-                  <div class="time">1:44 PM</div>
-              </div>
-          </div>
+          <img class="chatLogo" src="../imgs/streamlyVectorIconNoText.png" >
+          <div class="chatBar"></div>
           <input class="chatInput" placeholder="Type a message..." type="text">
 
         </div>
@@ -75,7 +63,8 @@
       config.callTimerDelay = '<%= config.webrtc.callTimerDelay%>';
     </script>
     <script src='/js/libs/simplewebrtc-with-adapter.bundle.js'></script>
-    <script src="/js/videoEvents.js"></script>
-    <script src="/js/main.js"></script>
+    <script src='/js/videoEvents.js'></script>
+    <script src='js/chatEvents.js'></script>
+    <script src='/js/main.js'></script>
   </body>
 </html>
