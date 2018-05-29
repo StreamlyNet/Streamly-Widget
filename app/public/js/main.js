@@ -199,7 +199,8 @@ function webrtcEvents() {
           listingName: self.listing,
           createdRoomId: roomId,
           remotePeerName: self.currStoreName,
-          avatarHashes: ""
+          avatarHashes: "",
+          fromWidget: true,
         };
 
       self.socket.emit('call', data);
