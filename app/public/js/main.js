@@ -5,6 +5,7 @@ var callTimer;
 var callTimerDelay = config.callTimerDelay;
 
 var currStoreName;
+var isChatOpen = false;
 
 // Provider information
 var remoteStoreName;
@@ -256,6 +257,9 @@ function socketEvents() {
   socket.on('chatMsg', function(data) {
     if (data.msg) {
       self.prependMsg(data, false);
+    }
+    if (!isChatOpen) {
+      self.addChatNotification();
     }
   });
 }

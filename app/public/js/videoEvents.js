@@ -146,13 +146,15 @@ function clearCountTimer() {
         $('.centPerMinute__value').text('0.00');
     }
 }
+
 function toggleChatWindow(){
-    var isChatOpen = $('.videoContainer').hasClass('chatOpen') && $('.chatContainer').hasClass('chatOpen');
+     // Declared in main.js file
+    isChatOpen = $('.videoContainer').hasClass('chatOpen') && $('.chatContainer').hasClass('chatOpen');
     if (isChatOpen) {
-        $('.videoContainer').removeClass('chatOpen');
-        $('.chatContainer').removeClass('chatOpen');
+        closeChat();
+        isChatOpen = false;
     } else {
-        $('.videoContainer').addClass('chatOpen');
-        $('.chatContainer').addClass('chatOpen');
+        openChat();
+        isChatOpen = true;
     }
 }

@@ -31,6 +31,14 @@ function generateMessage(msg, clientName) {
     return $(newMsg);
 }
 
+function addChatNotification() {
+    $('.btnContainer .openchatbtn').addClass('notification');
+}
+
+function removeChatNotficiation() {
+    $('.btnContainer .openchatbtn').removeClass('notification');
+}
+
 function getTime(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -41,6 +49,19 @@ function getTime(date) {
     return hours + ':' + minutes + ' ' + suffix;
 }
 
+function openChat() {
+    $('.videoContainer').addClass('chatOpen');
+    $('.chatContainer').addClass('chatOpen');
+    removeChatNotficiation();
+}
+
+function closeChat() {
+    $('.videoContainer').removeClass('chatOpen');
+    $('.chatContainer').removeClass('chatOpen');
+}
+
 function deleteChat() {
     $('.chatBar').empty();
+    removeChatNotficiation();
+    closeChat();
 }
