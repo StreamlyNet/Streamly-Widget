@@ -60,7 +60,7 @@ function events() {
 
   // Video button click
   $('.js-pause').on('click', function(e) {
-      const localVideoContainerEl = $('#localVideoContainer');
+      var localVideoContainerEl = $('#localVideoContainer');
       if ($(this).hasClass('paused')) {
         self.webrtc.resumeVideo();
         $(this).removeClass('paused');
@@ -167,7 +167,7 @@ function webrtcEvents() {
   webrtc.on('videoAdded', function(video, peer) {
     if (peer && peer.pc) {
       self.remotePeer = peer;
-      peer.pc.on('iceConnectionStateChange', (event) => {
+      peer.pc.on('iceConnectionStateChange', function (event) {
         switch (peer.pc.iceConnectionState) {
          case 'checking':
            console.log('checking state');

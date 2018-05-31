@@ -89,7 +89,7 @@ function handleHideVideoControls(that){
 }
 
 function handleFullScreenBtnClick(self) {
-  const fullScreenVideo = $('.videoContainer')[0];
+  var fullScreenVideo = $('.videoContainer')[0];
   var fullscreenButton = $('.js-fullScreen');
   var remoteVideo = $('#remoteContainer')[0];
   if (fullScreenVideo && fullScreenVideo.webkitRequestFullscreen) {
@@ -108,7 +108,7 @@ function handleFullScreenBtnClick(self) {
 }
 
 function handleCancelFullScreenBtnClick(self){
-    const fullScreenVideo = $('.videoContainer');
+    var fullScreenVideo = $('.videoContainer');
     var fullscreenButton = $('.js-fullScreen');
     if (fullScreenVideo && document.webkitExitFullscreen) {
       document.webkitExitFullscreen();

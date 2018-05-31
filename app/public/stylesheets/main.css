@@ -251,7 +251,6 @@ body{
 
 .videoContainer__body .chatContainer .chatBar{
     display: flex;
-    flex-flow: column;
     overflow-y: auto;
     position: relative;
     z-index: 1;

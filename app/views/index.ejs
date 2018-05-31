@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <title>Streamly widget</title>
+    <% if(prod) {%>
+    <link rel="stylesheet" type="text/css" href="out/css/main.min.css">
+    <link rel="stylesheet" type="text/css" href="out/css/clientScreen.min.css">
+    <% } else {%>
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/clientScreen.css">
+    <% } %>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://use.fontawesome.com/bfc751953e.js"></script>
   </head>
@@ -63,8 +68,12 @@
       config.callTimerDelay = '<%= config.webrtc.callTimerDelay%>';
     </script>
     <script src='/js/libs/simplewebrtc-with-adapter.bundle.js'></script>
+    <% if(prod) {%>
+      <script src='/out/js/main.min.js'></script>
+    <% } else {%>
     <script src='/js/videoEvents.js'></script>
     <script src='js/chatEvents.js'></script>
     <script src='/js/main.js'></script>
+    <% } %>
   </body>
 </html>

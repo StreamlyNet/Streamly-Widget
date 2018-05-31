@@ -4,13 +4,13 @@ module.exports = {
     clientScreenJS: {
         // Javascript file
         get(req, res) {
-            res.sendFile(stringPath('app/public/js/clientScreen.js'));
+            res.sendFile(stringPath('clientScreen.js'));
         },
     },
     clientScreenCSS: {
         // CSS file
         get(req, res) {
-            res.sendFile(stringPath('app/public/stylesheets/clientScreen.css'));
+            res.sendFile(stringPath('clientScreen.css'));
         },
     }
 };
