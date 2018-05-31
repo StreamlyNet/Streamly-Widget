@@ -260,6 +260,7 @@ function socketEvents() {
     }
     if (!isChatOpen) {
       self.addChatNotification();
+      self.toggleVideoControls();
     }
   });
 }

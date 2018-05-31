@@ -1,5 +1,7 @@
 var isFullScreen = false;
 var countTimer;
+var mouseIn;
+var animationControlsTimeout = null;
 
  function toggleCallingWindow (flag, storeName, video) {
      var callDetailsSelector = $('#videoContainer').find('.btnContainer.top .nickname, .btnContainer.top .durationDisplay__text, .btnContainer.top .centPerMinute__container');
@@ -67,9 +69,11 @@ var countTimer;
     containerSelector.off();
     var self = this;
     containerSelector.mouseenter(function(){
+        mouseIn = true;
        handleDisplayVideoControls($(this));
     });
     containerSelector.mouseleave(function(){
+        mouseIn = false;
        handleHideVideoControls($(this));
     });
 }
@@ -127,7 +131,7 @@ function handleCancelFullScreenBtnClick(self){
 }
 
 function toggleControlsInFullscreenMode(self){
-    var animationControlsTimeout = null;
+    animationControlsTimeout = null;
     $("#videoContainer").off('mousemove');
     $("#videoContainer").on('mousemove', function() {
       var videoContainer = $(this);
@@ -157,4 +161,16 @@ function toggleChatWindow(){
         openChat();
         isChatOpen = true;
     }
+}
+
+function toggleVideoControls() {
+    animationControlsTimeout = null;
+    var videoContainer = $('#videoContainer');
+    clearTimeout(animationControlsTimeout);
+    handleDisplayVideoControls(videoContainer);
+    animationControlsTimeout = setTimeout(function () {
+        if (!mouseIn) {
+            self.handleHideVideoControls(videoContainer);
+        }
+    }, 2000);
 }
