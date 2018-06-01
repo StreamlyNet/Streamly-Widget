@@ -50,12 +50,14 @@ function getTime(date) {
 }
 
 function openChat() {
+    $('#remoteContainer').addClass('chatOpen');
     $('.videoContainer').addClass('chatOpen');
     $('.chatContainer').addClass('chatOpen');
     removeChatNotficiation();
 }
 
 function closeChat() {
+    $('#remoteContainer').removeClass('chatOpen');
     $('.videoContainer').removeClass('chatOpen');
     $('.chatContainer').removeClass('chatOpen');
 }

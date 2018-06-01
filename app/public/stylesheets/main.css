@@ -274,6 +274,7 @@ body{
     max-width: 80%;
     border-radius: 5px;
     margin: 5px 0 5px 0;
+    min-width: 35%;
 }
 .chatBubble:first-child{
     margin-bottom: 10px;
@@ -319,4 +320,24 @@ body{
 }
 .notification{
     border: solid #FFA500;
+}
+
+.videoContainer__body.fullScreen{
+    height: 100vh;
+    width: 100vw;
+}
+
+.videoContainer.fullScreen, #remoteContainer.fullScreen video {
+    height: 100vh;
+    width: 100vw;
+}
+
+.videoContainer.fullScreen.chatOpen, #remoteContainer.fullScreen.chatOpen video{
+    height: 100vh;
+    width: 80vw;
+}
+
+.chatContainer.fullScreen.chatOpen {
+    height: 100vh;
+    width: 20vw;
 }

@@ -92,45 +92,19 @@ function handleHideVideoControls(that){
     that.find('.btnContainer').removeClass('display');
 }
 
-function handleFullScreenBtnClick(self) {
-  var fullScreenVideo = $('.videoContainer')[0];
-  var fullscreenButton = $('.js-fullScreen');
-  var remoteVideo = $('#remoteContainer')[0];
-  if (fullScreenVideo && fullScreenVideo.webkitRequestFullscreen) {
-    fullScreenVideo.webkitRequestFullscreen();
-    isFullscreen = true;
-    toggleControlsInFullscreenMode(self);
-    $('.videoContainer').css('height','100vh');
-    $('.videoContainer').css('width','100vw');
-    $('#remoteContainer video').css('height','100vh');
-    $('#remoteContainer video').css('width','100vw');
-    fullscreenButton.off();
-    fullscreenButton.attr('title', 'Exit fullScreen');
-    fullscreenButton.html('<i class="fa fa-expand" aria-hidden="true"></i>');
-    fullscreenButton.click(function(){self.handleCancelFullScreenBtnClick(self)});
-  }
+function handleFullScreenBtnClick() {
+    openFullScreen();
+    isFullScreen = true;
+    toggleControlsInFullscreenMode();
+    addFullScreenElements(this);
 }
 
 function handleCancelFullScreenBtnClick(self){
-    var fullScreenVideo = $('.videoContainer');
-    var fullscreenButton = $('.js-fullScreen');
-    if (fullScreenVideo && document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-      isFullscreen = false;
-      $("#videoContainer").off('mousemove');
-      clearTimeout(self.animationControlsTimeout);
-      $('.videoContainer').css('height','480px');
-      $('.videoContainer').css('width','720px');
-      $('#remoteContainer video').css('height','480px');
-      $('#remoteContainer video').css('width','720px');
-      fullscreenButton.off();
-      fullscreenButton.attr('title', 'FullScreen');
-      fullscreenButton.html('<i class="fa fa-arrows-alt" aria-hidden="true"></i>');
-      fullscreenButton.click(function(){self.handleFullScreenBtnClick(self)});
-    }
+    closeFullScreen();
 }
 
-function toggleControlsInFullscreenMode(self){
+function toggleControlsInFullscreenMode(){
+    var self = this;
     animationControlsTimeout = null;
     $("#videoContainer").off('mousemove');
     $("#videoContainer").on('mousemove', function() {
@@ -152,7 +126,6 @@ function clearCountTimer() {
 }
 
 function toggleChatWindow(){
-     // Declared in main.js file
     isChatOpen = $('.videoContainer').hasClass('chatOpen') && $('.chatContainer').hasClass('chatOpen');
     if (isChatOpen) {
         closeChat();
@@ -180,4 +153,66 @@ function toggleLoadingWindow(flag){
     if(!flag){
         $('#videoContainer .loadingScreen').addClass('hide');
     }
+}
+
+function openFullScreen() {
+    var fullScreenVideo = $('.videoContainer__body')[0];
+    if (isChrome || isEdge || isSafari || isOpera) {
+        fullScreenVideo.webkitRequestFullscreen();
+    }
+    else if (isFirefox){
+        fullScreenVideo.mozRequestFullScreen();
+    }
+    else if (isIE) {
+        fullScreenVideo.msRequestFullscreen()
+    }
+}
+
+function closeFullScreen() {
+     if (isFullScreen) {
+         var self = this;
+         isFullScreen = false;
+
+         if (isChrome || isEdge || isSafari || isOpera) {
+             document.webkitExitFullscreen();
+         }
+         else if (isFirefox){
+             document.mozCancelFullScreen();
+         }
+         else if (isIE) {
+             document.msExitFullscreen()
+         }
+
+         removeFullScreenElements(self);
+         $("#videoContainer").off('mousemove');
+         clearTimeout(self.animationControlsTimeout);
+     }
+}
+
+function addFullScreenElements(self) {
+    var fullScreenBtn = $('.js-fullScreen');
+    $('.videoContainer__body').addClass('fullScreen');
+    $('.videoContainer').addClass('fullScreen');
+    $('.chatContainer').addClass('fullScreen');
+    $('#remoteContainer').addClass('fullScreen');
+    fullScreenBtn.off();
+    fullScreenBtn.attr('title', 'Exit fullScreen');
+    fullScreenBtn.html('<i class="fa fa-expand" aria-hidden="true"></i>');
+    fullScreenBtn.click(function() {
+        self.handleCancelFullScreenBtnClick()
+    });
+}
+
+function removeFullScreenElements(self) {
+    var fullScreenBtn = $('.js-fullScreen');
+    $('.videoContainer__body').removeClass('fullScreen');
+    $('.videoContainer').removeClass('fullScreen');
+    $('.chatContainer').removeClass('fullScreen');
+    $('#remoteContainer').removeClass('fullScreen');
+    fullScreenBtn.off();
+    fullScreenBtn.attr('title', 'FullScreen');
+    fullScreenBtn.html('<i class="fa fa-arrows-alt" aria-hidden="true"></i>');
+    fullScreenBtn.click(function() {
+        self.handleFullScreenBtnClick()
+    });
 }
