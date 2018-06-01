@@ -174,3 +174,10 @@ function toggleVideoControls() {
         }
     }, 2000);
 }
+
+function toggleLoadingWindow(flag){
+    $('#videoContainer .loadingScreen').removeClass('hide');
+    if(!flag){
+        $('#videoContainer .loadingScreen').addClass('hide');
+    }
+}

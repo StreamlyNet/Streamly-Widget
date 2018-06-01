@@ -15,6 +15,11 @@ var remotePeerId;
 // Temp variable used to fix bug with incorrect RTCPeerConnection
 var tempConnection;
 
+// Ice restart variables
+var ongoingCall = false;
+var failTimer = null;
+var remotePeer;
+
 $(document).ready(function() {
   events();
   tempConnection = window.RTCPeerConnection;
@@ -160,6 +165,10 @@ function webrtcEvents() {
 
   webrtc.on('connectionReady', function(sessionId) {
     console.log('Connection is ready with session id ' + sessionId);
+    if (ongoingCall) {
+       console.log('Initiating ice restart');
+       remotePeer.icerestart(sid);
+    }
     self.sid = sessionId;
     self.socket.emit('initializeSession', {obId: self.currStoreName, sid: self.sid});
   });
@@ -174,14 +183,23 @@ function webrtcEvents() {
            break;
          case 'connected':
            console.log('connected state');
+           clearTimeout(self.failTimer);
+           self.failTimer = null;
+           self.toggleLoadingWindow(false);
          case 'completed':
            console.log('completed state');
            break;
          case 'disconnected':
            console.log('disconnected state');
+           self.toggleLoadingWindow(true);
            break;
          case 'failed':
            console.log('failed state');
+           console.log('Setting timeout after call has been dropped');
+           self.failTimer = setTimeout(function() {
+              self.closeConn();
+              console.log('Call ended due to connectivity problem');
+           }, 30 * 1000);
            break;
          case 'closed':
            console.log('closed state');
@@ -193,25 +211,27 @@ function webrtcEvents() {
   });
 
   webrtc.on('readyToCall', function() {
-      self.webrtc.createRoom(self.uuid(), function (error, roomId) {
-        data = {
-          to: self.remotePeerId,
-          from: self.currStoreName,
-          listingName: self.listing,
-          createdRoomId: roomId,
-          remotePeerName: self.currStoreName,
-          avatarHashes: "",
-          fromWidget: true,
-        };
+   if (!ongoingCall) {
+       self.webrtc.createRoom(self.uuid(), function (error, roomId) {
+           data = {
+               to: self.remotePeerId,
+               from: self.currStoreName,
+               listingName: self.listing,
+               createdRoomId: roomId,
+               remotePeerName: self.currStoreName,
+               avatarHashes: "",
+               fromWidget: true,
+           };
 
-      self.socket.emit('call', data);
+           self.socket.emit('call', data);
 
-      self.callTimer = setTimeout(function() {
-        self.socket.emit('timeOut', {to: self.remotePeerId, from: self.currStoreName });
-        self.closeConn();
-        console.log('No answer');
-      }, callTimerDelay);
-      });
+           self.callTimer = setTimeout(function () {
+               self.socket.emit('timeOut', {to: self.remotePeerId, from: self.currStoreName});
+               self.closeConn();
+               console.log('No answer');
+           }, callTimerDelay);
+       });
+   }
   });
 }
 
@@ -228,6 +248,7 @@ function socketEvents() {
 
   socket.on('accepted', function() {
     console.log('The call has been accepted');
+    self.ongoingCall = true;
     self.clearTimer();
   });
 
@@ -303,6 +324,8 @@ function closeConn() {
 
   webrtc = null;
   socket = null;
+  ongoingCall = null;
+  remotePeer = null;
 
   // Inform client provider window that call has ended.
   // It should hide the modal.
