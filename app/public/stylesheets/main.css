@@ -318,8 +318,13 @@ body{
     float: left;
     margin-left: calc(50% - 102px);
 }
-.notification{
-    border: solid #FFA500;
+.notification::after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #ffa200;
 }
 
 .videoContainer__body.fullScreen{
