@@ -5,7 +5,7 @@ body{
     font-family: sans-serif;
     margin: 0;
 }
-.hide{
+.videoContainer__body .hide{
     display: none;
 }
 .flexboxCenter, .videoContainer__body .btnContainer.top, .videoContainer__body .videoContainer__spinner {
@@ -81,8 +81,8 @@ body{
 }
 .videoContainer__body #remoteContainer .callingScreen .callingScreen__name {
   color: white;
-  padding: 95px 0 35px 0;
-  font-size: 16px;
+  padding-top: calc(50vh - 30px);
+  font-size: 30px;
 }
 .videoContainer__body #remoteContainer .loadingScreen {
   background-color: #4d5c6c;
@@ -345,4 +345,16 @@ body{
 .chatContainer.fullScreen.chatOpen {
     height: 100vh;
     width: 20vw;
+}
+.videoContainer__msgs{
+    height: 100vh;
+    background-color: #4d5c6c;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-size: 30px;
+    color: #fff;
+}
+.videoContainer__msgs:not(.hide) + div{
+    display: none;
 }
