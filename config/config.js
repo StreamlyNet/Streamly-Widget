@@ -2,7 +2,8 @@ var config = {};
 
 config.server = {
   host: 'localhost',
-  port: 8080
+  httpsPort: 443,
+  httpPort: 80
 };
 
 config.widget = {

@@ -7,7 +7,7 @@ function events() {
             type: 'initiateCall',
             peerId: $(this).data().peerId,
             listingName: $(this).data().listingName,
-            widgetStoreName: $(this).data().widgetStoreName,
+            widgetStoreName: window.location.hostname,
             remoteStoreName: $(this).data().remoteStoreName
         };
 
@@ -45,7 +45,7 @@ function setEssentials() {
     widgetContainer.id = "streamlyWg";
     document.getElementsByTagName('body')[0].appendChild(widgetContainer);
 
-    createElement('link', 'http://localhost:8080/streamly/api/clientScreen.css');
+    createElement('link', 'http://localhost/streamly/api/clientScreen.css');
     if (!window.jQuery) {
         // Add jQuery if it is not included in page
         createElement('script', 'https://code.jquery.com/jquery-3.3.1.min.js',
@@ -101,7 +101,7 @@ function attachIframe() {
          $('<iframe />', {
             name: 'streamly-widget',
             id: 'clientScreen__iframe',
-            src: 'http://localhost:8080/',
+            src: 'http://localhost/',
             allowFullScreen: '',
             frameborder: "0",
             allow: "microphone; camera"

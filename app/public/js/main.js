@@ -137,7 +137,7 @@ function events() {
   // Listen to messages from parent window
   bindEvent(window, 'message', function (e) {
     if (e.data && e.data.type === 'initiateCall') {
-      self.currStoreName = e.data.widgetStoreName;
+      self.currStoreName = 'Visitor of ' + e.data.widgetStoreName;
       self.remoteStoreName = e.data.remoteStoreName;
       self.remotePeerId = e.data.peerId;
       self.listing = e.data.listingName;
