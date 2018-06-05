@@ -1,18 +1,18 @@
 module.exports = [
   {
-    path: '/',
+    path: '/widget',
     handler:  rootRequire('app/routes/IndexRoute'),
   },
   {
-    path: '/test',
+    path: '/widget/test',
     handler: rootRequire('app/routes/TestRoute'),
   },
   {
-    path: '/streamly/api',
+    path: '/widget/streamly/api',
     handler: rootRequire('app/routes/StreamlyAPIRoute'),
   },
   {
-    path: '/generator',
+    path: '/widget/generator',
     handler: rootRequire('app/routes/GeneratorRoute'),
   }
 ]

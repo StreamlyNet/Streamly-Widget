@@ -3,7 +3,7 @@ var codeTemplate = '<script>\n' +
                    '// Load Streamly Widget\n' +
                    '(function() {\n' +
                    '   var tag = document.createElement(\'script\');\n' +
-                   '   tag.src = "http://localhost:8080/streamly/api/clientScreen.js";\n' +
+                   '   tag.src = "https://video.streamly.net/widget/streamly/api/clientScreen.js";\n' +
                    '   var firstScriptTag = document.getElementsByTagName(\'script\')[0];\n' +
                    '   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);\n' +
                    '})();\n'+

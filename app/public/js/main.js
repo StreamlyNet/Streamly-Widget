@@ -205,8 +205,7 @@ function webrtcEvents() {
            console.log('failed state');
            console.log('Setting timeout after call has been dropped');
            self.failTimer = setTimeout(function() {
-              self.closeConn();
-              console.log('Call ended due to connectivity problem');
+               self.toggleTerminationMessage('Call ended due to connectivity problem');
            }, 30 * 1000);
            break;
          case 'closed':
@@ -235,11 +234,14 @@ function webrtcEvents() {
 
            self.callTimer = setTimeout(function () {
                self.socket.emit('timeOut', {to: self.remotePeerId, from: self.currStoreName});
-               self.closeConn();
-               console.log('No answer');
+               self.toggleTerminationMessage('No answer');
            }, callTimerDelay);
        });
    }
+  });
+
+  webrtc.on('localStreamRequestFailed', function() {
+      self.toggleTerminationMessage('Please provide access to microphone and camera');
   });
 }
 
@@ -250,8 +252,7 @@ function socketEvents() {
   }
 
   socket.on('declined', function() {
-    console.log('The call has been declined');
-    self.closeConn();
+    self.toggleTerminationMessage('The call has been declined');
   });
 
   socket.on('accepted', function() {
@@ -261,25 +262,21 @@ function socketEvents() {
   });
 
   socket.on('userOffline', function() {
-    console.log('User is offline');
-    self.closeConn();
+    self.toggleTerminationMessage('User is offline');
   });
 
   socket.on('userBusy', function() {
-    console.log('User is busy');
-    self.closeConn();
+    self.toggleTerminationMessage('User is busy');
   });
 
   socket.on('callEnded', function(remotePeerId) {
-    console.log('Call ended by remote user');
-    self.closeConn();
+    self.toggleTerminationMessage('Call ended by remote user');
   });
 
   socket.on('peerDisconnected', function(remotePeerId) {
     if (self.remotePeerId === remotePeerId) {
-      console.log('Remote peer has been disconnected. Ending call!');
       self.changeSelfState();
-      self.closeConn();
+      self.toggleTerminationMessage('Remote peer has been disconnected. Ending call!');
     }
   });
 
@@ -292,6 +289,19 @@ function socketEvents() {
       self.toggleVideoControls();
     }
   });
+}
+
+function toggleTerminationMessage(info) {
+    var msgContainer = $('.videoContainer__msgs');
+    var self = this;
+    msgContainer.text(info);
+    msgContainer.removeClass('hide');
+    var msgTimeout = setTimeout(function() {
+        msgContainer.addClass('hide');
+        msgContainer.text('');
+        self.closeConn();
+        msgTimeout = null;
+    }, 2500)
 }
 
 // Used to create unique room name
@@ -326,6 +336,7 @@ function closeConn() {
     webrtc.off();
     webrtc.stopLocalVideo();
     webrtc.leaveRoom();
+    webrtc.disconnect();
   }
   if (socket) {
     socket.off();
