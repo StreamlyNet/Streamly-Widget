@@ -25,11 +25,13 @@ function events() {
 function showVideoModal() {
     $('.integration__video-container').removeClass('hidden');
     $('.integration__overlay').removeClass('hidden');
+    $('body').addClass('integration__video-container--open');
 }
 
 function hideVideoModal() {
     $('.integration__video-container').addClass('hidden');
     $('.integration__overlay').addClass('hidden');
+    $('body').removeClass('integration__video-container--open');
 }
 
 function bindEvent(element, eventName, eventHandler) {
