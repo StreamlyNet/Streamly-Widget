@@ -197,6 +197,7 @@ body{
   position: relative;
   margin: 0 3px;
   border-radius: 25px;
+  outline: none;
 }
 .videoContainer__body .btnContainer .btn.red.btn-default {
   color: #fff;
@@ -318,6 +319,9 @@ body{
     float: left;
     margin-left: calc(50% - 102px);
 }
+ .videoContainer__body .btnContainer .notification, .videoContainer__body .btnContainer .btn-default.notification:hover,.videoContainer__body .btnContainer .btn-default.notification:not(.red):not([disabled]):active, .videoContainer__body .btnContainer .btn-default.notification:focus{
+    border: 2px solid #ffa200;
+}
 .notification::after{
     content: '';
     position: absolute;
@@ -325,6 +329,8 @@ body{
     height: 10px;
     border-radius: 5px;
     background-color: #ffa200;
+    top: -1px;
+    right: 2px;
 }
 
 .videoContainer__body.fullScreen{
