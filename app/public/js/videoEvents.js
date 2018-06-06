@@ -239,4 +239,12 @@ function getFullScreenElement(key) {
          return document.msFullscreenElement
      }
 }
+
+function elementsToInitialState() {
+    var muteBtn = $('.btnContainer__video .js-mute');
+    var videoBtn = $('.btnContainer__video .js-pause');
+
+    muteBtn.removeClass('muted').attr('title', 'Mute').html('<i class="fa fa-microphone" aria-hidden="true"></i>');
+    videoBtn.removeClass('paused').attr('title', 'Pause video').html('<i class="fa fa-video-camera" aria-hidden="true">');
+    $('#localVideoContainer').addClass('display');
 }

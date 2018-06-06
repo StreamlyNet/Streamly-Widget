@@ -360,4 +360,5 @@ function closeConn() {
   clearTimer();
   clearCountTimer();
   deleteChat();
+  elementsToInitialState();
 }
