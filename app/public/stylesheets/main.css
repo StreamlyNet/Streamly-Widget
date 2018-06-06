@@ -81,8 +81,8 @@ body{
 }
 .videoContainer__body #remoteContainer .callingScreen .callingScreen__name {
   color: white;
-  padding-top: calc(50vh - 30px);
-  font-size: 30px;
+  padding-top: calc(50vh - 16px);
+  font-size: 16px;
 }
 .videoContainer__body #remoteContainer .loadingScreen {
   background-color: #4d5c6c;
@@ -361,8 +361,17 @@ body{
     display: flex;
     justify-content:center;
     align-items: center;
-    font-size: 30px;
+    font-size: 16px;
     color: #fff;
+}
+.videoContainer__msgs__logo{
+    width: 100px;
+    position: absolute;
+    z-index: 2147483637;
+    opacity: .2;
+}
+.videoContainer__msgs__text{
+    z-index: 2147483638;
 }
 .videoContainer__msgs:not(.hide) + div{
     display: none;

@@ -18,6 +18,10 @@ function events() {
     bindEvent(window, 'message', function (e) {
         if (e.data && e.data.message === 'close') {
             self.hideVideoModal();
+            $('.integration__video-container').removeClass('display-msgs');
+        }
+        if(e.data && e.data.message === 'display-message'){
+            $('.integration__video-container').addClass('display-msgs');
         }
     });
 }

@@ -293,12 +293,14 @@ function socketEvents() {
 
 function toggleTerminationMessage(info) {
     var msgContainer = $('.videoContainer__msgs');
+    var msgText = $('.videoContainer__msgs__text');
     var self = this;
-    msgContainer.text(info);
+    msgText.text(info);
     msgContainer.removeClass('hide');
+    window.parent.postMessage({message: 'display-message'}, '*');
     var msgTimeout = setTimeout(function() {
         msgContainer.addClass('hide');
-        msgContainer.text('');
+        msgText.text('');
         self.closeConn();
         msgTimeout = null;
     }, 2500)
