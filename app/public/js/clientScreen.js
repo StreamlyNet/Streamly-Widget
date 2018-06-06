@@ -114,7 +114,7 @@ function attachIframe() {
 }
 
 function addBtnClasses() {
-    $(".streamlyBtn").addClass('integration__button vertical-right integration__button--vertical js-call');
+    $(".streamlyBtn").addClass('integration__button js-call');
 }
 
 setEssentials();

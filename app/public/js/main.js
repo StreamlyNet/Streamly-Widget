@@ -39,7 +39,7 @@ function init() {
     localVideoEl: 'localVideo',
     remoteVideosEl: 'remoteVideo',
     autoRequestMedia: false,
-    detectSpeakingEvents: false,
+    detectSpeakingEvents: true,
     socketio: {
       forceNew: true
     },

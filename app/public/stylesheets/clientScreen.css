@@ -19,8 +19,6 @@
     height: 100%;
 }
 .integration__button{
-    position: fixed;
-    right: 0px;
     padding: 0 20px;
     line-height: 40px;
     font-size: 16px;
@@ -31,14 +29,6 @@
     font-weight: 700;
     text-transform:  uppercase;
     cursor: pointer;
-}
-.integration__button--vertical{
-    transform: rotate(90deg);
-    transform-origin: right top 0;
-}
-.integration__button.vertical-right{
-    top: 60vh;
-    right: 0px;
 }
 .integration__overlay{
     background-color: rgba(0, 0, 0, 0.7);
