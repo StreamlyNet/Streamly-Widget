@@ -3,6 +3,8 @@ var countTimer;
 var mouseIn;
 var animationControlsTimeout = null;
 
+var fullScreenKey;
+
  function toggleCallingWindow (flag, storeName, video) {
      var callDetailsSelector = $('#videoContainer').find('.btnContainer.top .nickname, .btnContainer.top .durationDisplay__text, .btnContainer.top .centPerMinute__container');
      var callingStringSelector = $('#videoContainer').find('.btnContainer.top .callingString');
@@ -95,8 +97,6 @@ function handleHideVideoControls(that){
 function handleFullScreenBtnClick() {
     openFullScreen();
     isFullScreen = true;
-    toggleControlsInFullscreenMode();
-    addFullScreenElements(this);
 }
 
 function handleCancelFullScreenBtnClick(self){
@@ -182,10 +182,6 @@ function closeFullScreen() {
          else if (isIE) {
              document.msExitFullscreen()
          }
-
-         removeFullScreenElements(self);
-         $("#videoContainer").off('mousemove');
-         clearTimeout(self.animationControlsTimeout);
      }
 }
 
@@ -215,4 +211,32 @@ function removeFullScreenElements(self) {
     fullScreenBtn.click(function() {
         self.handleFullScreenBtnClick()
     });
+}
+
+function handleFullScreenChangeEvent(event, key) {
+     fullScreenKey = key;
+     var self = this;
+     $(document).on(event, function(e) {
+         var element = getFullScreenElement(fullScreenKey);
+         if (element) {
+             self.toggleControlsInFullscreenMode();
+             self.addFullScreenElements(self);
+         }
+         else {
+             self.removeFullScreenElements(self);
+             $("#videoContainer").off('mousemove');
+             self.clearTimeout(self.animationControlsTimeout);
+         }
+     })
+}
+
+function getFullScreenElement(key) {
+     if (key === 'webkit') {
+        return document.webkitFullscreenElement
+     } else if (key === 'firefox') {
+        return document.mozFullScreenElement
+     } else if (key === 'ie') {
+         return document.msFullscreenElement
+     }
+}
 }

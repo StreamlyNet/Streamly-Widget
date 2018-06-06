@@ -104,14 +104,18 @@ function events() {
 
   // Fullscreen
   $('.js-fullScreen').on('click', function() {
-      self.handleFullScreenBtnClick(self)
-
-      $(document).keydown(function(e) {
-         if (self.isFullscreen && e.keyCode == 27) {
-            self.handleCancelFullScreenBtnClick(self);
-        }
-    });
+      self.handleFullScreenBtnClick(self);
   });
+
+    if (isChrome || isOpera || isEdge || isSafari) {
+        handleFullScreenChangeEvent('webkitfullscreenchange', 'webkit');
+    }
+    else if (isFirefox) {
+        handleFullScreenChangeEvent('mozfullscreenchange', 'firefox');
+    }
+    else if (isIE) {
+        handleFullScreenChangeEvent('MSFullscreenChange','ie');
+    }
 
   // Send message
   $('.chatInput').keypress(function(e) {
