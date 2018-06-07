@@ -352,6 +352,7 @@ function closeConn() {
   socket = null;
   ongoingCall = null;
   remotePeer = null;
+  isChatOpen = false;
 
   // Inform client provider window that call has ended.
   // It should hide the modal.
