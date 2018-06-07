@@ -296,6 +296,7 @@ function socketEvents() {
 }
 
 function toggleTerminationMessage(info) {
+    closeFullScreen();
     var msgContainer = $('.videoContainer__msgs');
     var msgText = $('.videoContainer__msgs__text');
     var self = this;
@@ -337,7 +338,6 @@ function clearTimer() {
 
 function closeConn() {
   console.log('Destroying connection');
-  closeFullScreen();
   if (webrtc) {
     webrtc.off();
     webrtc.stopLocalVideo();
