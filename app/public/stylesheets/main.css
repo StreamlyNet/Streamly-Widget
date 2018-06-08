@@ -156,7 +156,7 @@ body{
     display: none;
 }
 .videoContainer__body .chatContainer.chatOpen {
-    display: flex;
+    display: block;
     width: 30%;
     background-color: #d5dde1;
     height: 480px;
@@ -166,7 +166,7 @@ body{
     font-size: 14px;
     box-sizing: border-box;
     overflow-y: auto;
-    flex-direction: column;
+    padding-bottom: calc(35px + 1%);
 }
 .videoContainer__body .btnContainer {
   position: absolute;
@@ -254,13 +254,14 @@ body{
 }
 
 .videoContainer__body .chatContainer .chatBar{
-    display: flex;
     overflow-y: auto;
-    position: relative;
+    position: absolute;
     z-index: 1;
-    flex-grow: 1;
-    flex-flow: column-reverse;
-    height: 100%;
+    bottom: calc(35px + 1%);
+    margin-top: 1%;
+    left: 2%;
+    width: 96%;
+    max-height: calc(480px - (35px + 2%) );
 }
 .videoContainer__body .chatLogo{
     width: 100px;
@@ -279,20 +280,18 @@ body{
     border-radius: 5px;
     margin: 5px 0 5px 0;
     min-width: 35%;
-}
-.chatBubble:first-child{
-    margin-bottom: 10px;
+    clear: both;
 }
 .chatBubble:last-child{
-    margin-top: 0;
+    margin-top: 10px;
 }
 .chatBubble.mine{
     background-color: #25b4b0;
-    align-self: flex-end;
+    float: right;
 }
 .chatBubble.theirs{
     background-color: #fff;
-    align-self: flex-start;
+    float: left;
 }
 .chatBubble>.caption{
     font-size: 10px;
@@ -309,10 +308,12 @@ body{
     height: 30px;
     border-radius: 5px;
     border: none;
-    margin-bottom: 3px;
     text-indent: 5px;
     font-size: 14px;
-    width: 100%;
+    width: 96%;
+    left: 2%;
+    position: absolute;
+    bottom: 1%;
 }
 .videoContainer__body .btnContainer > .openchatbtn{
     float: right;
@@ -354,6 +355,9 @@ body{
 .chatContainer.fullScreen.chatOpen {
     height: 100vh;
     width: 20vw;
+}
+.chatContainer.fullScreen.chatOpen .chatBar{
+    max-height: 100vh;
 }
 .videoContainer__msgs{
     height: 100vh;

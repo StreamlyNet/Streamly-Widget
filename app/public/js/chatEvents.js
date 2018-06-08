@@ -13,8 +13,10 @@ function prependMsg(data, isMine) {
     else {
         msg = generateMessage(data.msg, data.from).addClass('theirs');
     }
+    var chatBar = $('.chatBar');
 
-    $('.chatBar').prepend(msg);
+    chatBar.append(msg);
+    chatBar.scrollTop(chatBar.prop("scrollHeight"));
 }
 
 function generateMessage(msg, clientName) {
