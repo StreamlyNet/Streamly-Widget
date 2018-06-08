@@ -198,6 +198,8 @@ body{
   margin: 0 3px;
   border-radius: 25px;
   outline: none;
+  border: none;
+  background-color: #fff;
 }
 .btn:focus{
     outline: none;
@@ -205,22 +207,20 @@ body{
 .videoContainer__body .btnContainer .btn.red.btn-default {
   color: #fff;
   background-color: #d9534f;
-  border-color: #d43f3a;
+  border: none;
 }
 .videoContainer__body .btnContainer .btn.red.btn-default:hover {
   color: #fff;
   background-color: #c9302c;
-  border-color: #ac2925;
 }
 .videoContainer__body .btnContainer .btn-default:not([disabled]):hover {
   color: #333;
   background-color: #e6e6e6;
-  border-color: #adadad;
+  cursor: pointer;
 }
 .videoContainer__body .btnContainer .btn-default:not(.red):not([disabled]):active, .videoContainer__body .btnContainer .btn-default.paused, .videoContainer__body .btnContainer .btn-default.muted {
   color: #333;
   background-color: #d4d4d4;
-  border-color: #8c8c8c;
 }
 .videoContainer__body .btnContainer .fa-phone.end-call {
   transform: rotate(135deg);
