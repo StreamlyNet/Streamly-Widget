@@ -280,7 +280,7 @@ function socketEvents() {
   socket.on('peerDisconnected', function(remotePeerId) {
     if (self.remotePeerId === remotePeerId) {
       self.changeSelfState();
-      self.toggleTerminationMessage('Remote peer has been disconnected. Ending call!');
+      self.toggleTerminationMessage('Call ended by remote user');
     }
   });
 

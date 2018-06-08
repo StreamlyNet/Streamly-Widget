@@ -18,24 +18,24 @@ function events() {
     bindEvent(window, 'message', function (e) {
         if (e.data && e.data.message === 'close') {
             self.hideVideoModal();
-            $('.integration__video-container').removeClass('display-msgs');
+            $('.streamly.integration__video-container').removeClass('display-msgs');
         }
         if(e.data && e.data.message === 'display-message'){
-            $('.integration__video-container').addClass('display-msgs');
+            $('.streamly.integration__video-container').addClass('display-msgs');
         }
     });
 }
 
 function showVideoModal() {
-    $('.integration__video-container').removeClass('hidden');
-    $('.integration__overlay').removeClass('hidden');
-    $('body').addClass('integration__video-container--open');
+    $('.streamly.integration__video-container').removeClass('hidden');
+    $('.streamly.integration__overlay').removeClass('hidden');
+    $('body').addClass('streamly integration__video-container--open');
 }
 
 function hideVideoModal() {
-    $('.integration__video-container').addClass('hidden');
-    $('.integration__overlay').addClass('hidden');
-    $('body').removeClass('integration__video-container--open');
+    $('.streamly.integration__video-container').addClass('hidden');
+    $('.streamly.integration__overlay').addClass('hidden');
+    $('body').removeClass('streamly integration__video-container--open');
 }
 
 function bindEvent(element, eventName, eventHandler) {
@@ -101,9 +101,9 @@ function createElement(element, src, success, failure) {
 function attachIframe() {
     $('#streamlyWg').before(
         $('<div />', {
-             class: "integration__overlay hidden"
+             class: "streamly integration__overlay hidden"
         })
-    ).addClass("integration__video-container hidden")
+    ).addClass("streamly integration__video-container hidden")
      .prepend(
          $('<iframe />', {
             name: 'streamly-widget',
@@ -118,7 +118,7 @@ function attachIframe() {
 }
 
 function addBtnClasses() {
-    $(".streamlyBtn").addClass('integration__button js-call');
+    $(".streamlyBtn").addClass('streamly integration__button js-call');
 }
 
 setEssentials();

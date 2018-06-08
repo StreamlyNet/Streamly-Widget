@@ -245,8 +245,10 @@ function getFullScreenElement(key) {
 function elementsToInitialState() {
     var muteBtn = $('.btnContainer__video .js-mute');
     var videoBtn = $('.btnContainer__video .js-pause');
+    var loadingScreen = $('.videoContainer__body .loadingScreen');
 
     muteBtn.removeClass('muted').attr('title', 'Mute').html('<i class="fa fa-microphone" aria-hidden="true"></i>');
     videoBtn.removeClass('paused').attr('title', 'Pause video').html('<i class="fa fa-video-camera" aria-hidden="true">');
+    loadingScreen.addClass('hide');
     $('#localVideoContainer').addClass('display');
 }
