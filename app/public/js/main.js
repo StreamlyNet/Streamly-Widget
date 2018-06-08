@@ -5,6 +5,7 @@ var callTimer;
 var callTimerDelay = config.callTimerDelay;
 
 var currStoreName;
+var currUserId;
 var isChatOpen = false;
 
 // Provider information
@@ -46,6 +47,11 @@ function init() {
     debug: false,
   });
   socket = webrtc.connection.connection;
+  currUserId = generateUserId();
+}
+
+function generateUserId() {
+    return '_' + Math.random().toString(36).substr(2, 9);
 }
 
 function events() {
@@ -95,7 +101,7 @@ function events() {
   $('.js-end').on('click', function() {
     var data = {
       to: self.remotePeerId,
-      from: self.currStoreName
+      from: self.currUserId
     };
 
     self.socket.emit('endCall', data);
@@ -128,6 +134,7 @@ function events() {
 
       var data = {
         from: self.currStoreName,
+        remotePeerId: self.currUserId,
         to: self.remotePeerId,
         msg: message
       };
@@ -182,7 +189,7 @@ function webrtcEvents() {
        remotePeer.icerestart(sid);
     }
     self.sid = sessionId;
-    self.socket.emit('initializeSession', {obId: self.currStoreName, sid: self.sid});
+    self.socket.emit('initializeSession', {obId: self.currUserId, sid: self.sid});
   });
 
   webrtc.on('videoAdded', function(video, peer) {
@@ -226,7 +233,7 @@ function webrtcEvents() {
        self.webrtc.createRoom(self.uuid(), function (error, roomId) {
            data = {
                to: self.remotePeerId,
-               from: self.currStoreName,
+               from: self.currUserId,
                listingName: self.listing,
                createdRoomId: roomId,
                remotePeerName: self.currStoreName,
@@ -237,7 +244,7 @@ function webrtcEvents() {
            self.socket.emit('call', data);
 
            self.callTimer = setTimeout(function () {
-               self.socket.emit('timeOut', {to: self.remotePeerId, from: self.currStoreName});
+               self.socket.emit('timeOut', {to: self.remotePeerId, from: self.currUserId});
                self.toggleTerminationMessage('No answer');
            }, callTimerDelay);
        });
@@ -326,7 +333,7 @@ function uuid() {
 }
 
 function changeSelfState() {
-   socket.emit('changeSelfState', { from: currStoreName });
+   socket.emit('changeSelfState', { from: currUserId });
 }
 
 function clearTimer() {
