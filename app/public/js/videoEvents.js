@@ -19,6 +19,7 @@ var fullScreenKey;
         callingProfileSelector.removeClass('hide');
         disattachVisualizeVideoControlEvents();
         $('.js-fullScreen').prop("disabled", true);
+        $('.js-openchat').prop('disabled', true);
      } else {
          $('.nickname').text(storeName);
          $('#remoteContainer').append(video);
@@ -29,6 +30,7 @@ var fullScreenKey;
          callingProfileSelector.addClass('hide');
          attachVisualizeVideoControlEvents();
          $('.js-fullScreen').prop("disabled", false);
+         $('.js-openchat').prop('disabled', false);
          startCountTimer();
      }
  }

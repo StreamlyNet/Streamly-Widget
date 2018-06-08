@@ -338,6 +338,7 @@ function clearTimer() {
 
 function closeConn() {
   console.log('Destroying connection');
+  closeFullScreen();
   if (webrtc) {
     webrtc.off();
     webrtc.stopLocalVideo();

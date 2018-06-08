@@ -129,12 +129,12 @@ body{
   opacity: 1;
   z-index: 11;
 }
-.videoContainer__body .videoContainer__body {
+.videoContainer__body {
   min-width: 640px;
   transition: 0.5s;
   opacity: 0;
 }
-.videoContainer__body .videoContainer__body.display {
+.videoContainer__body.display {
   opacity: 1;
 }
 .videoContainer__body > .flex.gutterHLg {
@@ -249,7 +249,7 @@ body{
   z-index: 10;
   text-align: center;
 }
-.videoContainer__body .btnContainer .js-fullScreen[disabled] {
+.videoContainer__body .btnContainer .js-fullScreen[disabled], .videoContainer__body .btnContainer .js-openchat[disabled] {
   opacity: 0.2;
 }
 
