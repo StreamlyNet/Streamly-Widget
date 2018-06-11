@@ -118,7 +118,7 @@ function attachIframe() {
 }
 
 function addBtnClasses() {
-    $(".streamlyBtn").addClass('streamly integration__button js-call');
+    $(".streamlyBtn").addClass('streamly js-call');
 }
 
 setEssentials();

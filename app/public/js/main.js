@@ -49,6 +49,7 @@ function init() {
   });
   socket = webrtc.connection.connection;
   currUserId = generateUserId();
+  console.log('Store peer id of current user is ' + currUserId);
 }
 
 function generateUserId() {
@@ -185,7 +186,7 @@ function webrtcEvents() {
 
   webrtc.on('connectionReady', function(sessionId) {
     console.log('Connection is ready with session id ' + sessionId);
-    if (ongoingCall) {
+    if (ongoingCall && !isFirefox) {
        console.log('Initiating ice restart');
        remotePeer.icerestart(sid);
     }
@@ -216,9 +217,14 @@ function webrtcEvents() {
          case 'failed':
            console.log('failed state');
            console.log('Setting timeout after call has been dropped');
-           self.failTimer = setTimeout(function() {
+           if (isFirefox) {
                self.toggleTerminationMessage('Call ended due to connectivity problem');
-           }, 30 * 1000);
+           }
+           else {
+               self.failTimer = setTimeout(function() {
+                   self.toggleTerminationMessage('Call ended due to connectivity problem');
+               }, 30 * 1000);
+           }
            break;
          case 'closed':
            console.log('closed state');
