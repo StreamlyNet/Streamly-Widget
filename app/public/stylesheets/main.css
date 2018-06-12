@@ -282,6 +282,7 @@ body{
     margin: 5px 0 5px 0;
     min-width: 35%;
     clear: both;
+    overflow-wrap: break-word;
 }
 .chatBubble:last-child{
     margin-top: 10px;
