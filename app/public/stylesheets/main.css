@@ -260,6 +260,7 @@ body{
     bottom: calc(35px + 1%);
     margin-top: 1%;
     left: 2%;
+    top: 1%;
     width: 96%;
     max-height: calc(480px - (35px + 2%) );
 }
