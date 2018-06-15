@@ -2,6 +2,23 @@ function events() {
     var self = this;
 
     $('.js-call').on('click', function () {
+        if((navigator.userAgent.indexOf("Chrome") == -1 ) && (navigator.userAgent.indexOf("Safari") == -1 && navigator.userAgent.indexOf("Version/11") == -1) && (navigator.userAgent.indexOf("Firefox") == -1 )){
+            var msgContainer = $($('#clientScreen__iframe').contents().find("html")).find('.videoContainer__msgs');
+            var msgText =$($('#clientScreen__iframe').contents().find("html")).find('.videoContainer__msgs__text');
+            $('.streamly.integration__video-container').addClass('display-msgs');
+            showVideoModal();
+            msgContainer.removeClass('hide');
+            var self = this;
+            msgText.text('Your browser is not currently supported by the Streamly widget');
+            var msgTimeout = setTimeout(function() {
+                msgContainer.addClass('hide');
+                msgText.text('');
+                msgTimeout = null;
+                hideVideoModal();
+                $('.streamly.integration__video-container').removeClass('display-msgs');
+            }, 2500);
+            return;
+        }
         var iframeEl = $('#clientScreen__iframe')[0];
         var msg = {
             type: 'initiateCall',
@@ -12,7 +29,7 @@ function events() {
         };
 
         iframeEl.contentWindow.postMessage(msg, '*');
-        self.showVideoModal();
+        showVideoModal();
     });
 
     bindEvent(window, 'message', function (e) {
