@@ -25,7 +25,7 @@ var remotePeer;
 var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 var isFirefox = typeof InstallTrigger !== 'undefined';
 var ua = navigator.userAgent.toLowerCase();
-var isSafari = ua.indexOf('safari') != -1;
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
 var isIE = /*@cc_on!@*/false || !!document.documentMode;
 var isChrome = !!window.chrome && !!window.chrome.webstore;
 var isEdge = !isIE && !!window.StyleMedia;
@@ -150,6 +150,10 @@ function events() {
   // Listen to messages from parent window
   bindEvent(window, 'message', function (e) {
     if (e.data && e.data.type === 'initiateCall') {
+      if (!isFirefox && !isSafari && !isChrome) {
+          self.toggleTerminationMessage('Your browser is not currently supported by the Streamly widget');
+          return;
+      }
       self.currStoreName = 'Visitor of ' + e.data.widgetStoreName;
       self.remoteStoreName = e.data.remoteStoreName;
       self.remotePeerId = e.data.peerId;

@@ -2,23 +2,6 @@ function events() {
     var self = this;
 
     $('.js-call').on('click', function () {
-        if((navigator.userAgent.indexOf("Chrome") == -1 ) && (navigator.userAgent.indexOf("Safari") == -1 && navigator.userAgent.indexOf("Version/11") == -1) && (navigator.userAgent.indexOf("Firefox") == -1 )){
-            var msgContainer = $($('#clientScreen__iframe').contents().find("html")).find('.videoContainer__msgs');
-            var msgText =$($('#clientScreen__iframe').contents().find("html")).find('.videoContainer__msgs__text');
-            $('.streamly.integration__video-container').addClass('display-msgs');
-            showVideoModal();
-            msgContainer.removeClass('hide');
-            var self = this;
-            msgText.text('Your browser is not currently supported by the Streamly widget');
-            var msgTimeout = setTimeout(function() {
-                msgContainer.addClass('hide');
-                msgText.text('');
-                msgTimeout = null;
-                hideVideoModal();
-                $('.streamly.integration__video-container').removeClass('display-msgs');
-            }, 2500);
-            return;
-        }
         var iframeEl = $('#clientScreen__iframe')[0];
         var msg = {
             type: 'initiateCall',
@@ -68,8 +51,8 @@ function setEssentials() {
     widgetContainer.id = "streamlyWg";
     document.getElementsByTagName('body')[0].appendChild(widgetContainer);
 
-    // createElement('link', 'https://video.streamly.net/widget/streamly/api/clientScreen.css');
-    createElement('link', 'http://localhost:8081/widget/streamly/api/clientScreen.css');
+    createElement('link', 'https://video.streamly.net/widget/streamly/api/clientScreen.css');
+    // createElement('link', 'http://localhost:8081/widget/streamly/api/clientScreen.css');
     if (!window.jQuery) {
         // Add jQuery if it is not included in page
         createElement('script', 'https://code.jquery.com/jquery-3.3.1.min.js',
@@ -125,8 +108,8 @@ function attachIframe() {
          $('<iframe />', {
             name: 'streamly-widget',
             id: 'clientScreen__iframe',
-            // src: 'https://video.streamly.net/widget/',
-            src: 'http://localhost:8081/widget/',
+            src: 'https://video.streamly.net/widget/',
+            // src: 'http://localhost:8081/widget/',
             allowFullScreen: '',
             frameborder: "0",
             allow: "microphone; camera"
