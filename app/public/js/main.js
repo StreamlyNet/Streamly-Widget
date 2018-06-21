@@ -151,7 +151,7 @@ function events() {
   bindEvent(window, 'message', function (e) {
     if (e.data && e.data.type === 'initiateCall') {
       if (!isFirefox && !isSafari && !isChrome) {
-          self.toggleTerminationMessage('Your browser is not currently supported by the Streamly widget');
+          self.toggleTerminationMessage('Your browser is currently not supported by the Streamly widget');
           return;
       }
       self.currStoreName = 'Visitor of ' + e.data.widgetStoreName;
