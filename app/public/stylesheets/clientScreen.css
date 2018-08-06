@@ -10,6 +10,7 @@
     height: 0;
     overflow: hidden;
     border: 1px solid #dbdbdb;
+    z-index: 20000;
 }
 .streamly.integration__video-container.display-msgs{
     padding-bottom: 100px;

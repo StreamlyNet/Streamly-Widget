@@ -1,4 +1,4 @@
-function events() {
+function events($) {
     var self = this;
 
     $('.js-call').on('click', function () {
@@ -12,12 +12,12 @@ function events() {
         };
 
         iframeEl.contentWindow.postMessage(msg, '*');
-        showVideoModal();
+        showVideoModal($);
     });
 
     bindEvent(window, 'message', function (e) {
         if (e.data && e.data.message === 'close') {
-            self.hideVideoModal();
+            self.hideVideoModal($);
             $('.streamly.integration__video-container').removeClass('display-msgs');
         }
         if(e.data && e.data.message === 'display-message'){
@@ -26,13 +26,13 @@ function events() {
     });
 }
 
-function showVideoModal() {
+function showVideoModal($) {
     $('.streamly.integration__video-container').removeClass('hidden');
     $('.streamly.integration__overlay').removeClass('hidden');
     $('body').addClass('streamly integration__video-container--open');
 }
 
-function hideVideoModal() {
+function hideVideoModal($) {
     $('.streamly.integration__video-container').addClass('hidden');
     $('.streamly.integration__overlay').addClass('hidden');
     $('body').removeClass('streamly integration__video-container--open');
@@ -57,10 +57,10 @@ function setEssentials() {
         // Add jQuery if it is not included in page
         createElement('script', 'https://code.jquery.com/jquery-3.3.1.min.js',
             // success
-            function () {
-                attachIframe();
-                addBtnClasses();
-                events();
+            function ($) {
+                attachIframe($);
+                addBtnClasses($);
+                events($);
             },
             //failure
             function() {
@@ -69,9 +69,9 @@ function setEssentials() {
         );
     }
     else {
-        attachIframe();
-        addBtnClasses();
-        events();
+        attachIframe(window.jQuery);
+        addBtnClasses(window.jQuery);
+        events(window.jQuery);
     }
 }
 
@@ -84,21 +84,27 @@ function createElement(element, src, success, failure) {
         tag.href = src;
     }
     else {
+        tag.async = false;
         tag.src = src;
+        tag.type = "text/javascript";
     }
 
     document.getElementsByTagName('head')[0].appendChild(tag);
 
     if (success) {
-        tag.onload = success;
+        tag.onload = function() {
+            success(jQuery);
+        }
     }
 
     if(failure) {
-        tag.onerror = failure;
+        tag.onerror = function() {
+            failure();
+        }
     }
 }
 
-function attachIframe() {
+function attachIframe($) {
     $('#streamlyWg').before(
         $('<div />', {
              class: "streamly integration__overlay hidden"
@@ -117,7 +123,7 @@ function attachIframe() {
     )
 }
 
-function addBtnClasses() {
+function addBtnClasses($) {
     $(".streamlyBtn").addClass('streamly js-call');
 }
 
